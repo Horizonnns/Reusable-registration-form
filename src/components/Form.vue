@@ -5,17 +5,21 @@ import Input from './Input.vue';
 import ErrorMessage from './ErrorMessage.vue';
 import HelperMessage from './HelperMessage.vue';
 
-const errors = ref({
-  name: 'Имя не запонено!',
-  email: 'Email не запонено!',
-  password: 'Password не заполнено!',
-});
-
 const form = ref({
   name: '',
   email: '',
   password: '',
 });
+
+const errors = ref({});
+
+function submit() {
+  errors.value = {
+    name: 'Name is invalid!',
+    email: 'Email is invalid!',
+    password: 'Password is invalid!',
+  };
+}
 </script>
 
 <template>
@@ -23,7 +27,7 @@ const form = ref({
     <div>
       <h1 class="text-3xl font-bold text-center mb-6">Registration Form</h1>
 
-      <form class="w-full max-w-md space-y-4 p-4">
+      <form @submit.prevent="submit" class="w-full max-w-md space-y-4 p-4">
         <!-- name -->
         <div class="space-y-1">
           <Label for="name" required>Name</Label>
